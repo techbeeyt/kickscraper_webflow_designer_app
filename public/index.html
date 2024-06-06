@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link href="./styles.css" rel="stylesheet" />
+  </head>
+
+  <body class="bg-white p-3 inter-normal">
+    <!-- Start Loading screen -->
+    <div
+      id="loading-spinner"
+      class="fixed inset-0 bg-transparent backdrop-blur-sm flex justify-center items-center flex-col z-50 transition-all duration-150"
+    >
+      <svg
+        class="animate-spin h-10 w-10 text-[#1B00DF]"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <circle
+          class="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          stroke-width="4"
+        ></circle>
+        <path
+          class="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+        ></path>
+      </svg>
+    </div>
+    <!-- End Loading Screen -->
+
+    <!-- Start Splash Screen -->
+    <div
+      id="splash-screen"
+      class="fixed inset-0 bg-white flex justify-center items-center flex-col z-50"
+    >
+      <div
+        class="flex justify-start items-center gap-3 -translate-y-6 animate-pulse duration-150"
+      >
+        <img src="/images/site-icon.png" width="25px" height="25px" />
+
+        <div class="flex justify-start items-center gap-3">
+          <h1 class="text-lg font-semibold">Kick Scraper</h1>
+          <div
+            class="bg-[#625FF2] text-white px-1 py-0.5 text-[6px] rounded -translate-y-[2px]"
+          >
+            Beta v0.05
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Splash Screen -->
+
+    <!-- Login Screen -->
+    <div
+      class="relative w-full unauthorized bg-contain bg-top bg-no-repeat bg-[url('/images/login-page-pattern2.png')]"
+    >
+      <div class="flex justify-center items-center w-full">
+        <div class="w-full">
+          <img
+            alt="site-icon"
+            width="36"
+            height="36"
+            class="mx-auto mb-2"
+            src="/images/site-icon.png"
+            style="color: transparent"
+          />
+          <div class="text-center mb-3">
+            <h4 class="text-[#101828] text-lg font-semibold">
+              Welcome To Kick Scraper
+            </h4>
+            <p class="text-gray-500 text-sm">Webflow extension</p>
+          </div>
+
+          <div class="mt-2">
+            <label for="appId" class="text-sm font-medium">Email</label>
+            <div
+              class="mt-2 border border-gray-200 rounded-md flex justify-start items-center gap-1"
+            >
+              <div class="pl-2">
+                <svg
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  height="1em"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                  <path d="M10 4v4"></path>
+                  <path d="M2 8h20"></path>
+                  <path d="M6 4v4"></path>
+                </svg>
+              </div>
+
+              <input
+                id="appIdInput"
+                type="text"
+                class="p-2 w-full rounded-md outline-none text-sm"
+                placeholder="Enter your Email"
+              />
+            </div>
+          </div>
+          <div class="mt-2">
+            <label for="apiKey" class="text-sm font-medium">Secret Key</label>
+            <div
+              class="mt-2 border border-gray-200 rounded-md flex justify-start items-center gap-1"
+            >
+              <div class="pl-2">
+                <svg
+                  width="20"
+                  height="16"
+                  viewBox="0 0 20 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4.30187 0.447755H15.6994C16.1387 0.44774 16.5177 0.447728 16.8298 0.473231C17.1593 0.500148 17.487 0.559578 17.8023 0.72024C18.2727 0.959923 18.6552 1.34237 18.8948 1.81278C19.0555 2.1281 19.1149 2.45578 19.1418 2.78523C19.1673 3.09737 19.1673 3.47633 19.1673 3.91562V6.28109C19.1673 6.74133 18.7942 7.11442 18.334 7.11442C17.8738 7.11442 17.5007 6.74133 17.5007 6.28109V3.94776C17.5007 3.46729 17.5 3.15707 17.4807 2.92095C17.4622 2.69457 17.4308 2.61063 17.4098 2.56943C17.3299 2.41263 17.2024 2.28515 17.0456 2.20525C17.0044 2.18426 16.9205 2.15286 16.6941 2.13436C16.458 2.11507 16.1478 2.11442 15.6673 2.11442H4.33399C3.85353 2.11442 3.5433 2.11507 3.30718 2.13436C3.0808 2.15286 2.99686 2.18426 2.95566 2.20525C2.79886 2.28515 2.67138 2.41263 2.59148 2.56943C2.57049 2.61063 2.53909 2.69457 2.52059 2.92095C2.5013 3.15707 2.50065 3.46729 2.50065 3.94776V6.94776C2.50065 7.42822 2.5013 7.73844 2.52059 7.97456C2.53909 8.20094 2.57049 8.28488 2.59148 8.32608C2.67138 8.48288 2.79886 8.61037 2.95566 8.69026C2.99686 8.71126 3.0808 8.74265 3.30718 8.76115C3.5433 8.78044 3.85353 8.78109 4.33399 8.78109H9.16732C9.62756 8.78109 10.0007 9.15418 10.0007 9.61442C10.0007 10.0747 9.62756 10.4478 9.16732 10.4478H4.30188C3.8626 10.4478 3.4836 10.4478 3.17146 10.4223C2.84201 10.3954 2.51433 10.3359 2.19901 10.1753C1.72861 9.93559 1.34615 9.55314 1.10647 9.08273C0.945809 8.76742 0.886379 8.43973 0.859461 8.11028C0.833959 7.79814 0.833971 7.41919 0.833985 6.97991V3.91564C0.833971 3.47636 0.833959 3.09737 0.859461 2.78523C0.886379 2.45578 0.945809 2.1281 1.10647 1.81278C1.34615 1.34237 1.72861 0.959923 2.19901 0.72024C2.51433 0.559578 2.84201 0.500148 3.17146 0.473231C3.4836 0.447728 3.86259 0.44774 4.30187 0.447755Z"
+                    fill="black"
+                  />
+                  <path
+                    d="M4.79232 5.44775C4.79232 4.87246 5.25869 4.40609 5.83399 4.40609C6.40928 4.40609 6.87565 4.87246 6.87565 5.44775C6.87565 6.02305 6.40928 6.48942 5.83399 6.48942C5.25869 6.48942 4.79232 6.02305 4.79232 5.44775Z"
+                    fill="black"
+                  />
+                  <path
+                    d="M10.0007 4.40609C9.42535 4.40609 8.95899 4.87246 8.95899 5.44775C8.95899 6.02305 9.42535 6.48942 10.0007 6.48942C10.5759 6.48942 11.0423 6.02305 11.0423 5.44775C11.0423 4.87246 10.5759 4.40609 10.0007 4.40609Z"
+                    fill="black"
+                  />
+                  <path
+                    d="M14.1673 4.40609C13.592 4.40609 13.1257 4.87246 13.1257 5.44775C13.1257 6.02305 13.592 6.48942 14.1673 6.48942C14.7426 6.48942 15.209 6.02305 15.209 5.44775C15.209 4.87246 14.7426 4.40609 14.1673 4.40609Z"
+                    fill="black"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.2923 9.82275C12.2923 8.5571 13.3183 7.53109 14.584 7.53109C15.8496 7.53109 16.8757 8.5571 16.8757 9.82275V10.4711C17.0444 10.4911 17.2337 10.5325 17.424 10.6294C17.7376 10.7892 17.9925 11.0442 18.1523 11.3578C18.2676 11.584 18.3043 11.8087 18.3199 11.9992C18.334 12.1727 18.334 12.3775 18.334 12.5879V13.3077C18.334 13.518 18.334 13.7228 18.3199 13.8963C18.3043 14.0868 18.2676 14.3116 18.1523 14.5377C17.9925 14.8513 17.7376 15.1063 17.424 15.2661C17.1978 15.3813 16.973 15.4181 16.7825 15.4336C16.609 15.4478 16.4042 15.4478 16.1939 15.4478H12.9741C12.7638 15.4478 12.5589 15.4478 12.3855 15.4336C12.195 15.4181 11.9702 15.3813 11.744 15.2661C11.4304 15.1063 11.1754 14.8513 11.0156 14.5377C10.9004 14.3116 10.8637 14.0868 10.8481 13.8963C10.8339 13.7228 10.834 13.518 10.834 13.3077V12.5878C10.834 12.3775 10.8339 12.1727 10.8481 11.9992C10.8637 11.8087 10.9004 11.584 11.0156 11.3578C11.1754 11.0442 11.4304 10.7892 11.744 10.6294C11.9343 10.5325 12.1236 10.4911 12.2923 10.4711V9.82275ZM15.209 9.82275V10.4478H13.959V9.82275C13.959 9.47758 14.2388 9.19775 14.584 9.19775C14.9292 9.19775 15.209 9.47758 15.209 9.82275Z"
+                    fill="black"
+                  />
+                </svg>
+              </div>
+
+              <input
+                id="apiKeyInput"
+                type="text"
+                class="p-2 w-full rounded-md outline-none text-sm"
+                placeholder="Enter your Secret Key"
+              />
+            </div>
+          </div>
+
+          <button
+            id="verify-api-key-btn"
+            class="mt-3 bg-[#1B00DF] px-3 py-[10px] rounded-md text-white flex justify-center items-center gap-1 w-full"
+          >
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-width="0"
+              viewBox="0 0 512 512"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="32"
+                d="M336 176 225.2 304 176 255.8"
+              ></path>
+              <path
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="32"
+                d="M463.1 112.37C373.68 96.33 336.71 84.45 256 48c-80.71 36.45-117.68 48.33-207.1 64.37C32.7 369.13 240.58 457.79 256 464c15.42-6.21 223.3-94.87 207.1-351.63z"
+              ></path>
+            </svg>
+            <span class="whitespace-nowrap text-sm font-medium">Verify</span>
+          </button>
+        </div>
+      </div>
+
+      <div
+        class="fixed bottom-0 right-0 z-10 bg-[#1B00DF] h-80 w-full rounded-full translate-y-[67%] bg-contain bg-top bg-no-repeat bg-[url('/images/login-page-pattern2.png')] flex justify-center items-center flex-col"
+      >
+        <div class="-translate-y-[86px] px-10">
+          <div class="text-white text-center drop-shadow-md text-xs">
+            Let's Kick the scrapers
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- This UI Is shown to logged in user -->
+    <div class="w-full authorized">
+      <div class="flex justify-start items-center gap-3">
+        <h1 class="text-lg font-semibold">Kick Scraper</h1>
+        <div
+          class="bg-[#625FF2] text-white px-1 py-0.5 text-[8px] rounded -translate-y-[4px]"
+        >
+          Beta v0.05
+        </div>
+      </div>
+
+      <div class="flex justify-between items-center gap-2">
+        <div
+          class="border-b border-gray-400 flex justify-start items-center gap-4"
+        >
+          <div
+            class="border-b-2 border-indigo-600 text-sm font-semibold py-3 text-indigo-600"
+          >
+            Dashboard
+          </div>
+          <div class="text-sm font-semibold py-3">
+            <a
+              href="https://kickscraper.com/dashboard"
+              target="_blank"
+              class="flex justify-start items-center gap-2"
+            >
+              <span class="whitespace-nowrap text-sm">Account</span>
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16.5 6.4292L16.5 1.4292M16.5 1.4292H11.5M16.5 1.4292L9.83333 8.09587M7.33333 3.09587H5.5C4.09987 3.09587 3.3998 3.09587 2.86502 3.36835C2.39462 3.60803 2.01217 3.99048 1.77248 4.46089C1.5 4.99567 1.5 5.69573 1.5 7.09587V12.4292C1.5 13.8293 1.5 14.5294 1.77248 15.0642C2.01217 15.5346 2.39462 15.917 2.86502 16.1567C3.3998 16.4292 4.09987 16.4292 5.5 16.4292H10.8333C12.2335 16.4292 12.9335 16.4292 13.4683 16.1567C13.9387 15.917 14.3212 15.5346 14.5608 15.0642C14.8333 14.5294 14.8333 13.8293 14.8333 12.4292V10.5959"
+                  stroke="black"
+                  stroke-width="1.66667"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <a
+          href=""
+          target="_blank"
+          id="upgrade-app-url"
+          class="bg-[#FFB800] text-[#101828] px-3 py-1.5 text-sm font-semibold rounded-md"
+        >
+          Upgrade
+        </a>
+      </div>
+
+      <div data-ui="select_app">
+        <h1 class="text-sm font-medium mt-2 px-2">Select Your App</h1>
+        <div id="app-select" class=""></div>
+      </div>
+
+      <!-- Here the stats will be shown -->
+      <div class="bg-[#F9FAFB] mt-2 px-2 py-[10px] rounded-md" data-ui="stats">
+        <div
+          class="mb-2 bg-white border border-gray-200 flex justify-between rounded-md text-xs font-semibold overflow-hidden shadow"
+        >
+          <button
+            class="border-r border-gray-200 px-2 py-[10px] flex-grow text-center bg-white"
+            data-action="statRange"
+            data-range="last12Months"
+          >
+            12 Months
+          </button>
+          <button
+            class="border-r border-gray-200 px-2 py-[10px] flex-grow text-center bg-white"
+            data-action="statRange"
+            data-range="last30Days"
+          >
+            30 Days
+          </button>
+          <button
+            class="border-r border-gray-200 px-2 py-[10px] flex-grow text-center bg-white"
+            data-action="statRange"
+            data-range="last7Days"
+          >
+            7 Days
+          </button>
+          <button
+            class="p-[10px] flex-grow text-center bg-white"
+            data-action="statRange"
+            data-range="last24Hours"
+          >
+            24 Hours
+          </button>
+        </div>
+
+        <button
+          id="data-refresh-btn"
+          class="w-full p-1 flex justify-center items-center gap-1 text-gray-700 border border-gray-400 text-sm tracking-wide bg-gray-200 rounded-md hover:shadow-inner hidden"
+        >
+          <span>Refresh</span>
+          <svg
+            stroke="currentColor"
+            fill="currentColor"
+            stroke-width="0"
+            viewBox="0 0 512 512"
+            height="16px"
+            width="16px"
+            xmlns="http://www.w3.org/2000/svg"
+            id="data-refresh-spinner"
+          >
+            <path
+              fill="none"
+              stroke-linecap="square"
+              stroke-miterlimit="10"
+              stroke-width="32"
+              d="m400 148-21.12-24.57A191.43 191.43 0 0 0 240 64C134 64 48 150 48 256s86 192 192 192a192.09 192.09 0 0 0 181.07-128"
+            ></path>
+            <path
+              d="M464 68.45V220a4 4 0 0 1-4 4H308.45a4 4 0 0 1-2.83-6.83L457.17 65.62a4 4 0 0 1 6.83 2.83z"
+            ></path>
+          </svg>
+        </button>
+        <div class="w-full h-[1px] bg-transparent"></div>
+
+        <div class="grid grid-cols-12 mt-2 gap-y-3 px-1">
+          <div class="col-span-6 flex justify-start items-center gap-[10px]">
+            <div class="w-1 h-full rounded-full bg-[#F79009]"></div>
+            <div class="flex flex-col justify-start items-start gap-1">
+              <div class="text-xs">Total Traffic</div>
+              <div id="totalTraffic" class="text-lg font-semibold">40,000</div>
+            </div>
+          </div>
+          <div class="col-span-6 flex justify-start items-center gap-[10px]">
+            <div class="w-1 h-full rounded-full bg-[#1B00DF]"></div>
+            <div class="flex flex-col justify-start items-start gap-1">
+              <div class="text-xs">Human Traffic</div>
+              <div id="humanTraffic" class="text-lg font-semibold">3,000</div>
+            </div>
+          </div>
+          <div class="col-span-6 flex justify-start items-center gap-[10px]">
+            <div class="w-1 h-full rounded-full bg-[#17B26A]"></div>
+            <div class="flex flex-col justify-start items-start gap-1">
+              <div class="text-xs">White Bot</div>
+              <div id="whiteBot" class="text-lg font-semibold">132</div>
+            </div>
+          </div>
+          <div class="col-span-6 flex justify-start items-center gap-[10px]">
+            <div class="w-1 h-full rounded-full bg-[#FF567E]"></div>
+            <div class="flex flex-col justify-start items-start gap-1">
+              <div class="text-xs">Total Kicked Scraper</div>
+              <div id="totalKickedScraper" class="text-lg font-semibold">
+                231
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Analytics LINK -->
+      <div class="mt-4">
+        <a
+          id="analytics_url"
+          href=""
+          target="_blank"
+          class="bg-[#1B00DF] px-3 py-[7px] rounded-md text-white flex justify-start items-center gap-3 w-min"
+        >
+          <span class="whitespace-nowrap text-sm">View Full Analytics</span>
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 18 18"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M16.5 6.4292L16.5 1.4292M16.5 1.4292H11.5M16.5 1.4292L9.83333 8.09587M7.33333 3.09587H5.5C4.09987 3.09587 3.3998 3.09587 2.86502 3.36835C2.39462 3.60803 2.01217 3.99048 1.77248 4.46089C1.5 4.99567 1.5 5.69573 1.5 7.09587V12.4292C1.5 13.8293 1.5 14.5294 1.77248 15.0642C2.01217 15.5346 2.39462 15.917 2.86502 16.1567C3.3998 16.4292 4.09987 16.4292 5.5 16.4292H10.8333C12.2335 16.4292 12.9335 16.4292 13.4683 16.1567C13.9387 15.917 14.3212 15.5346 14.5608 15.0642C14.8333 14.5294 14.8333 13.8293 14.8333 12.4292V10.5959"
+              stroke="white"
+              stroke-width="1.66667"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
+    <script src="index.js" defer></script>
+  </body>
+</html>
