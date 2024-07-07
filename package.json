@@ -6,15 +6,17 @@
   "scripts": {
     "build": "npm install && tsc -p tsconfig.json && webflow extension bundle",
     "dev": "npm install && concurrently -r \"webflow extension serve\" \"tsc -p tsconfig.json --watch --preserveWatchOutput\"",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "css": "npx tailwindcss -i ./public/tailwind.css -o ./public/styles.css --watch"
   },
   "devDependencies": {
-    "@webflow/designer-extension-typings": "^0.2.0-beta.8",
     "@typescript-eslint/eslint-plugin": "^7.7.0",
     "@typescript-eslint/parser": "^7.7.0",
-    "eslint": "^8.5.7",
+    "@webflow/designer-extension-typings": "^0.2.0-beta.8",
     "concurrently": "^8.2.2",
-    "typescript": "^5.4.5",
-    "eslint-plugin-promise": "^6.1.1"
+    "eslint": "^8.5.7",
+    "eslint-plugin-promise": "^6.1.1",
+    "tailwindcss": "^3.4.4",
+    "typescript": "^5.4.5"
   }
 }

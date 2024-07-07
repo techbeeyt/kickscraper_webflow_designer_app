@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+}
+
+.authorized {
+  display: none;
+}
+
+.unauthorized {
+  display: block;
+}
+
+.inter-normal {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "slnt" 0;
+}
+
+.appItem {
+  background-color: aliceblue;
+  border-bottom: 1px solid #ccc;
+  padding: 4px 8px;
+}
+
+h1::selection,
+h1::selection,
+h2::selection,
+h3::selection,
+h4::selection,
+h5::selection,
+h6::selection,
+p::selection,
+a::selection,
+span::selection,
+div::selection,
+button::selection {
+  background-color: transparent;
+}
