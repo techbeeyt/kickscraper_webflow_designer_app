@@ -9,6 +9,15 @@
       rel="stylesheet"
     />
     <link href="./styles.css" rel="stylesheet" />
+
+    <style>
+      .login-bg {
+        background-image: url("images/login-page-pattern2.png");
+        background-position: top;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+    </style>
   </head>
 
   <body class="bg-white inter-normal">
@@ -48,7 +57,7 @@
       <div
         class="flex justify-start items-center gap-3 -translate-y-6 animate-pulse duration-150"
       >
-        <img src="/images/site-icon.png" width="25px" height="25px" />
+        <img src="./images/site-icon.png" width="25px" height="25px" />
 
         <div class="flex justify-start items-center gap-3">
           <h1 class="text-lg font-semibold">Kick Scraper</h1>
@@ -63,9 +72,7 @@
     <!-- End Splash Screen -->
 
     <!-- Login Screen -->
-    <div
-      class="relative w-full unauthorized bg-contain bg-top bg-no-repeat bg-[url('/images/login-page-pattern2.png')]"
-    >
+    <div class="relative w-full unauthorized login-bg">
       <div class="flex justify-center items-center w-full">
         <div class="w-full mt-20">
           <img
@@ -73,7 +80,7 @@
             width="36"
             height="36"
             class="mx-auto mb-2"
-            src="/images/site-icon.png"
+            src="./images/site-icon.png"
             style="color: transparent"
           />
           <div class="text-center mb-3">
@@ -110,7 +117,7 @@
       </div>
 
       <div
-        class="fixed bottom-0 right-0 z-10 bg-[#1B00DF] h-80 w-full rounded-full translate-y-[72%] bg-contain bg-top bg-no-repeat bg-[url('/images/login-page-pattern2.png')] flex justify-center items-center flex-col"
+        class="fixed bottom-0 right-0 z-10 bg-[#1B00DF] h-80 w-full rounded-full translate-y-[72%] flex justify-center items-center flex-col login-bg"
       >
         <div class="-translate-y-[92px] px-10">
           <div class="text-white text-center drop-shadow-md text-xs">
@@ -263,7 +270,9 @@
         <div class="bg-gray-50 pt-2 px-3">
           <h1 class="text-sm font-medium">Add Custom Code</h1>
           <p class="text-xs font-light">
-            Paste this code in your website
+            Please copy this code > go to your site settings tab > paste this
+            code into your head code > publish your site > then finish the
+            setup.
             <span class="text-rose-600 ml-1">(important)</span>
           </p>
         </div>
@@ -322,26 +331,7 @@
         class="bg-[#F9FAFB] mt-2 px-2 pb-[10px] rounded-md hidden"
       >
         <!-- App Info  -->
-        <div class="py-2 flex justify-start items-center gap-1">
-          <button class="text-sm font-medium" id="return-to-select-app">
-            Apps
-          </button>
-          <svg
-            stroke="currentColor"
-            fill="currentColor"
-            stroke-width="0"
-            viewBox="0 0 24 24"
-            height="1em"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path fill="none" d="M0 0h24v24H0V0z"></path>
-            <path
-              d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"
-            ></path>
-          </svg>
-          <span class="text-sm font-light" id="selected-app-name"></span>
-        </div>
+
         <!-- Stat Range -->
         <div
           class="mb-2 bg-white border border-gray-200 flex justify-between rounded-md text-xs font-semibold overflow-hidden shadow"

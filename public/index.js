@@ -190,7 +190,6 @@ var KickScraper = {
             if (event.origin !== appState.frontendUrl) {
                 return;
             }
-            console.log(event.data);
             // Get the access code from the event data
             const accessCode = event.data.accessCode;
             if (accessCode) {
@@ -384,8 +383,8 @@ var KickScraper = {
         const response = yield res.json();
         console.log(response);
         // update the app name
-        document.getElementById("selected-app-name").innerText =
-            response.application.name;
+        /* document.getElementById("selected-app-name").innerText =
+          response.application.name; */
         // Show the upgrade button or not ?
         if (response.application.subscription.length === 0 ||
             response.application.subscription[0].name === "free plan") {
@@ -552,12 +551,12 @@ document.getElementById("add-new-website").addEventListener("click", () => {
     KickScraper.setUi("add-website");
 });
 // return-to-select-app
-document
-    .getElementById("return-to-select-app")
-    .addEventListener("click", () => {
+/* document
+  .getElementById("return-to-select-app")
+  .addEventListener("click", () => {
     KickScraper.setUi("select_app");
     KickScraper.fetchUserApps();
-});
+  }); */
 /* add website form */
 const websiteNameInput = document.getElementById("website-name");
 const websiteUrlInput = document.getElementById("website-url");

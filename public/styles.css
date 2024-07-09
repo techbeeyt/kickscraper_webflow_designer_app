@@ -912,8 +912,8 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-\[url\(\'\/images\/login-page-pattern2\.png\'\)\] {
-  background-image: url('/images/login-page-pattern2.png');
+.bg-\[url\(\'\.\/images\/login-page-pattern2\.png\'\)\] {
+  background-image: url('./images/login-page-pattern2.png');
 }
 
 .bg-contain {
