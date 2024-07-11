@@ -153,11 +153,22 @@ var KickScraper = {
 
     /* Check if user is logged in or not */
     if (jwt) {
+      // user is logged in
       KickScraper.setAuthStatus("authorized");
       KickScraper.setupExternalLinks();
       if (!appId) {
-        KickScraper.setUi("select_app");
-        KickScraper.fetchUserApps();
+        // user has no selected app
+        // check if the user just created an app
+        const justCreatedApiKey = localStorage.getItem("createdApiKey");
+        if (justCreatedApiKey) {
+          KickScraper.setUi("copy_script");
+          document.getElementById(
+            "copy_script_textarea"
+          ).innerHTML = `<script id="kickscraper_script" src="https://cdn.kickscraper.com/?kick_key=${justCreatedApiKey}"></script>`;
+        } else {
+          KickScraper.setUi("select_app");
+          KickScraper.fetchUserApps();
+        }
       } else {
         const _userApps = await KickScraper.fetchUserApps(true);
         const userApps: Array<any> = _userApps.application;
@@ -213,6 +224,37 @@ var KickScraper = {
         KickScraper.initializeApp();
       }
     });
+  },
+
+  getApiKeyInfo: async () => {
+    const jwt = localStorage.getItem("jwt");
+    const appId = localStorage.getItem("createdAppId");
+    const apiKeyId = localStorage.getItem("createdApiKeyId");
+    const res = await fetch(
+      `${appState.backendUrl}/user/api/single/${appId}/${apiKeyId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": jwt,
+        },
+      }
+    );
+    const data = await res.json();
+    console.log(data);
+  },
+
+  logout: async () => {
+    localStorage.removeItem("jwt");
+    const appsIdsList = JSON.parse(localStorage.getItem("appIds") || "{}");
+    const currentSiteId = sessionStorage.getItem("siteId");
+    delete appsIdsList[currentSiteId];
+    localStorage.setItem("appIds", JSON.stringify(appsIdsList));
+    await webflow.notify({
+      type: "Success",
+      message: "Logged out successfully",
+    });
+    KickScraper.setAuthStatus("unauthorized");
   },
 
   fetchAppStats: async () => {
@@ -319,7 +361,6 @@ var KickScraper = {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       let apps: any;
-
       try {
         apps = await fetch(`${appState.backendUrl}/user/app/by_user`, {
           method: "GET",
@@ -329,6 +370,7 @@ var KickScraper = {
           },
         });
       } catch (error) {
+        console.log(error);
         await webflow.notify({
           type: "Error",
           message: "Failed to fetch user apps",
@@ -336,8 +378,6 @@ var KickScraper = {
       }
 
       const response = await apps.json();
-
-      console.log("response: ", response);
 
       if (return_result) {
         return response;
@@ -357,8 +397,8 @@ var KickScraper = {
       const addWebsite = document.getElementById("add-new-website");
 
       /* reverse the application list */
-      const Apps = response.application.reverse();
-      Apps.forEach((item: any) => {
+      const Apps = response?.application?.reverse();
+      Apps?.forEach((item: any) => {
         const clone = document.importNode(template, true);
 
         // set app name
@@ -453,8 +493,8 @@ var KickScraper = {
         "x-auth-token": jwt,
       },
     });
+
     const response = await res.json();
-    console.log(response);
 
     // update the app name
     /* document.getElementById("selected-app-name").innerText =
@@ -557,6 +597,9 @@ var KickScraper = {
     const name = appState.addWebsiteForm.name;
     const domain = appState.addWebsiteForm.domain;
 
+    /* store domain name in local storage */
+    localStorage.setItem("createdAppDomain", domain);
+
     if (name.length === 0 || domain.length === 0) {
       KickScraper.hideLoadingSpinner();
       await webflow.notify({
@@ -600,6 +643,9 @@ var KickScraper = {
       /* App Created Successfully */
       let data = await response.json();
 
+      /* Store Create APP id in local storage */
+      localStorage.setItem("createdAppId", data.application._id);
+
       // Now create api key
       response = await fetch(
         `${appState.backendUrl}/user/api/create/${data.application._id}`,
@@ -631,13 +677,14 @@ var KickScraper = {
       });
 
       /* store api key to the sessionStorage */
-      sessionStorage.setItem("createdApiKey", data.apiKey.key);
+      // sessionStorage.setItem("createdApiKey", data.apiKey.key);
+      localStorage.setItem("createdApiKey", data.apiKey.key);
 
       /* Set UI to copy script */
       KickScraper.setUi("copy_script");
       document.getElementById(
         "copy_script_textarea"
-      ).innerHTML = `<script src="https://cdn.kickscraper.com/?kick_key${data.apiKey.key}"></script>`;
+      ).innerHTML = `<script id="kickscraper_script" src="https://cdn.kickscraper.com/?kick_key=${data.apiKey.key}"></script>`;
     } catch (error) {
       await webflow.notify({
         type: "Error",
@@ -661,13 +708,10 @@ document.getElementById("add-new-website").addEventListener("click", () => {
   KickScraper.setUi("add-website");
 });
 
-// return-to-select-app
-/* document
-  .getElementById("return-to-select-app")
-  .addEventListener("click", () => {
-    KickScraper.setUi("select_app");
-    KickScraper.fetchUserApps();
-  }); */
+// logout btn
+document.getElementById("logout-btn").addEventListener("click", () => {
+  KickScraper.logout();
+});
 
 /* add website form */
 const websiteNameInput = document.getElementById(
@@ -699,9 +743,54 @@ addWebsiteBtn.addEventListener("click", async () => {
 document
   .getElementById("verify_script_btn")
   .addEventListener("click", async () => {
-    KickScraper.setUi("select_app");
-    KickScraper.fetchUserApps();
+    KickScraper.showLoadingSpinner();
+    const domain_name = localStorage.getItem("createdAppDomain");
+    const newTab = window.open(
+      Utils.makeValidURL(domain_name),
+      "_blank",
+      "top=0,left=0,width=50,height=50"
+    );
+
+    setTimeout(() => {
+      newTab.close();
+    }, 1500);
+
+    setTimeout(async () => {
+      KickScraper.hideLoadingSpinner();
+
+      const jwt = localStorage.getItem("jwt");
+      const selected_app_id = localStorage.getItem("createdAppId");
+      // check if application is verified or not
+      const res = await fetch(
+        `${appState.backendUrl}/user/app/single/${selected_app_id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": jwt,
+          },
+        }
+      );
+
+      const response = await res.json();
+
+      if (response.application.verified) {
+        /* clear recently created app details */
+        localStorage.removeItem("createdAppId");
+        localStorage.removeItem("createdAppDomain");
+        localStorage.removeItem("createdApiKey");
+
+        /* navigate to the app stat */
+        KickScraper.setSelectedApp(selected_app_id);
+      } else {
+        await webflow.notify({
+          type: "Error",
+          message: "Your app verification failed",
+        });
+      }
+    }, 2000);
   });
+
 /* statRange change */
 document.querySelectorAll('[data-action="statRange"]').forEach((el) => {
   el.addEventListener("click", () => {

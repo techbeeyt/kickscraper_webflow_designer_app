@@ -61,11 +61,6 @@
 
         <div class="flex justify-start items-center gap-3">
           <h1 class="text-lg font-semibold">Kick Scraper</h1>
-          <div
-            class="bg-[#625FF2] text-white px-1 py-0.5 text-[6px] rounded -translate-y-[2px]"
-          >
-            Beta v0.05
-          </div>
         </div>
       </div>
     </div>
@@ -129,13 +124,34 @@
 
     <!-- Authorized Screen: Dashboard -->
     <div class="w-full authorized">
-      <div class="flex justify-start items-center gap-3 pt-3 px-3">
+      <div class="flex justify-between items-center gap-3 pt-3 px-3">
         <h1 class="text-lg font-semibold">Kick Scraper</h1>
-        <div
-          class="bg-[#625FF2] text-white px-1 py-0.5 text-[8px] rounded -translate-y-[4px]"
+
+        <button
+          id="logout-btn"
+          class="bg-white text-black rounded-md border border-gray-300 flex justify-center items-center gap-2 px-2 py-1.5"
         >
-          Beta v0.05
-        </div>
+          <span class="text-xs">Logout</span>
+
+          <!-- Logout SVG -->
+
+          <svg
+            width="15"
+            height="16"
+            viewBox="0 0 15 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0.628906 8.00015C0.628906 4.71232 3.20112 2.00806 6.42126 2.00806C7.47987 2.00806 8.47285 2.30234 9.3264 2.81508C9.61008 2.9855 9.70191 3.35362 9.53149 3.6373C9.36108 3.92098 8.99296 4.01281 8.70928 3.84239C8.03514 3.43743 7.25446 3.20648 6.42126 3.20648C3.90521 3.20648 1.82732 5.33116 1.82732 8.00015C1.82732 10.6691 3.90521 12.7938 6.42126 12.7938C7.25446 12.7938 8.03514 12.5629 8.70928 12.1579C8.99296 11.9875 9.36108 12.0793 9.53149 12.363C9.70191 12.6467 9.61008 13.0148 9.3264 13.1852C8.47285 13.698 7.47987 13.9922 6.42126 13.9922C3.20112 13.9922 0.628906 11.288 0.628906 8.00015Z"
+              fill="#344054"
+            />
+            <path
+              d="M10.3918 5.17961C10.6258 4.9456 11.0052 4.9456 11.2392 5.17961L13.636 7.57645C13.87 7.81045 13.87 8.18985 13.636 8.42386L11.2392 10.8207C11.0052 11.0547 10.6258 11.0547 10.3918 10.8207C10.1578 10.5867 10.1578 10.2073 10.3918 9.97328L11.7657 8.59936H5.42258C5.09165 8.59936 4.82337 8.33109 4.82337 8.00015C4.82337 7.66922 5.09165 7.40094 5.42258 7.40094H11.7657L10.3918 6.02702C10.1578 5.79301 10.1578 5.41361 10.3918 5.17961Z"
+              fill="#344054"
+            />
+          </svg>
+        </button>
       </div>
 
       <!-- Dashboard , Account Link -->
@@ -213,8 +229,59 @@
 
       <!-- Add Website -->
       <div data-ui="add-website" class="hidden">
-        <div class="bg-gray-50 text-sm font-medium pt-2 px-3">Add Website</div>
-        <div class="bg-gray-50 p-2 grid grid-cols-12 gap-2">
+        <div
+          class="bg-gray-50 pt-3 px-3 flex justify-between items-center gap-2"
+        >
+          <span class="text-xs font-medium">Add Site URL</span>
+          <a
+            data-id="tutorial-url"
+            href=""
+            target="_blank"
+            class="bg-white rounded-md border border-gray-300 flex justify-center items-center gap-2 px-2 py-1.5"
+          >
+            <span class="text-xs">Watch Tutorial</span>
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 15 15"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0_14227_7735)">
+                <path
+                  opacity="0.12"
+                  d="M6.10352 5.67909C6.10352 5.3931 6.10352 5.2501 6.16328 5.17027C6.21537 5.1007 6.29509 5.05718 6.38178 5.05099C6.48125 5.04388 6.60153 5.12121 6.8421 5.27586L9.67073 7.09426C9.87949 7.22846 9.98386 7.29556 10.0199 7.38088C10.0514 7.45543 10.0514 7.53956 10.0199 7.61411C9.98386 7.69943 9.87949 7.76653 9.67073 7.90073L6.84211 9.71913C6.60153 9.87378 6.48125 9.95111 6.38178 9.94401C6.29509 9.93782 6.21537 9.89429 6.16328 9.82472C6.10352 9.74489 6.10352 9.60189 6.10352 9.3159V5.67909Z"
+                  fill="#344054"
+                />
+                <path
+                  d="M7.60147 13.4898C10.9108 13.4898 13.5936 10.8071 13.5936 7.49771C13.5936 4.18837 10.9108 1.50562 7.60147 1.50562C4.29213 1.50562 1.60938 4.18837 1.60938 7.49771C1.60938 10.8071 4.29213 13.4898 7.60147 13.4898Z"
+                  stroke="#344054"
+                  stroke-width="1.4381"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M6.10345 5.67931C6.10345 5.39331 6.10345 5.25032 6.16321 5.17049C6.2153 5.10092 6.29502 5.05739 6.38171 5.0512C6.48118 5.04409 6.60146 5.12142 6.84203 5.27607L9.67066 7.09448C9.87942 7.22868 9.98379 7.29578 10.0198 7.3811C10.0513 7.45565 10.0513 7.53977 10.0198 7.61432C9.98379 7.69964 9.87942 7.76674 9.67066 7.90094L6.84204 9.71934C6.60146 9.874 6.48118 9.95132 6.38171 9.94422C6.29502 9.93803 6.2153 9.8945 6.16321 9.82493C6.10345 9.7451 6.10345 9.6021 6.10345 9.31611V5.67931Z"
+                  stroke="#344054"
+                  stroke-width="1.4381"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_14227_7735">
+                  <rect
+                    width="14.381"
+                    height="14.381"
+                    fill="white"
+                    transform="translate(0.412109 0.307129)"
+                  />
+                </clipPath>
+              </defs>
+            </svg>
+          </a>
+        </div>
+        <div class="bg-gray-50 pt-3 px-2 pb-2 grid grid-cols-12 gap-2">
           <div class="col-span-12">
             <input
               id="website-name"
@@ -235,13 +302,13 @@
           <div class="col-span-12 flex flex-col gap-2 pb-3">
             <button
               id="add-website-btn"
-              class="w-full bg-[#1B00DF] text-white px-3 py-[0.5rem] text-sm font-medium rounded-md"
+              class="w-full bg-[#1B00DF] text-white px-3 py-[0.5rem] text-sm font-normal rounded-md"
             >
               Add Website
             </button>
             <button
               id="add-website"
-              class="w-full bg-[#FFB800] text-[#101828] px-3 py-[0.5rem] text-sm font-medium rounded-md flex justify-center items-center gap-2"
+              class="w-full bg-[#FFB800] text-[#101828] px-3 py-[0.5rem] text-sm font-normal rounded-md flex justify-center items-center gap-2"
               onclick="window.open(`${appState.frontendUrl}/dashboard?action=add_website`, '_blank')"
             >
               Add Website in Kickscraper
@@ -267,20 +334,63 @@
 
       <!-- Copy Script -->
       <div data-ui="copy_script" class="hidden">
-        <div class="bg-gray-50 pt-2 px-3">
-          <h1 class="text-sm font-medium">Add Custom Code</h1>
-          <p class="text-xs font-light">
-            Please copy this code > go to your site settings tab > paste this
-            code into your head code > publish your site > then finish the
-            setup.
-            <span class="text-rose-600 ml-1">(important)</span>
-          </p>
+        <div
+          class="bg-gray-50 pt-3 px-3 flex justify-between items-center gap-2"
+        >
+          <span class="text-xs font-medium">Add custom code site head tag</span>
+          <a
+            data-id="tutorial-url"
+            href=""
+            target="_blank"
+            class="bg-white rounded-md border border-gray-300 flex justify-center items-center gap-2 px-2 py-1.5"
+          >
+            <span class="text-xs whitespace-nowrap">Watch Tutorial</span>
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 15 15"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0_14227_7735)">
+                <path
+                  opacity="0.12"
+                  d="M6.10352 5.67909C6.10352 5.3931 6.10352 5.2501 6.16328 5.17027C6.21537 5.1007 6.29509 5.05718 6.38178 5.05099C6.48125 5.04388 6.60153 5.12121 6.8421 5.27586L9.67073 7.09426C9.87949 7.22846 9.98386 7.29556 10.0199 7.38088C10.0514 7.45543 10.0514 7.53956 10.0199 7.61411C9.98386 7.69943 9.87949 7.76653 9.67073 7.90073L6.84211 9.71913C6.60153 9.87378 6.48125 9.95111 6.38178 9.94401C6.29509 9.93782 6.21537 9.89429 6.16328 9.82472C6.10352 9.74489 6.10352 9.60189 6.10352 9.3159V5.67909Z"
+                  fill="#344054"
+                />
+                <path
+                  d="M7.60147 13.4898C10.9108 13.4898 13.5936 10.8071 13.5936 7.49771C13.5936 4.18837 10.9108 1.50562 7.60147 1.50562C4.29213 1.50562 1.60938 4.18837 1.60938 7.49771C1.60938 10.8071 4.29213 13.4898 7.60147 13.4898Z"
+                  stroke="#344054"
+                  stroke-width="1.4381"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M6.10345 5.67931C6.10345 5.39331 6.10345 5.25032 6.16321 5.17049C6.2153 5.10092 6.29502 5.05739 6.38171 5.0512C6.48118 5.04409 6.60146 5.12142 6.84203 5.27607L9.67066 7.09448C9.87942 7.22868 9.98379 7.29578 10.0198 7.3811C10.0513 7.45565 10.0513 7.53977 10.0198 7.61432C9.98379 7.69964 9.87942 7.76674 9.67066 7.90094L6.84204 9.71934C6.60146 9.874 6.48118 9.95132 6.38171 9.94422C6.29502 9.93803 6.2153 9.8945 6.16321 9.82493C6.10345 9.7451 6.10345 9.6021 6.10345 9.31611V5.67931Z"
+                  stroke="#344054"
+                  stroke-width="1.4381"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_14227_7735">
+                  <rect
+                    width="14.381"
+                    height="14.381"
+                    fill="white"
+                    transform="translate(0.412109 0.307129)"
+                  />
+                </clipPath>
+              </defs>
+            </svg>
+          </a>
         </div>
         <div class="bg-gray-50 p-2 grid grid-cols-12 gap-2">
           <div class="col-span-12 w-full">
             <textarea
               id="copy_script_textarea"
-              rows="3"
+              rows="4"
               class="bg-white w-full border border-gray-200 rounded-md px-3 py-[0.5rem] text-sm font-light tracking-wide placeholder:text-gray-500 break-all outline-none"
             >
 &lt;script src="https://cdn.kickscraper.com/?kick_key=596c7c34410c170c2dde573d75293aclx8q8dkt"&gt;&lt;/script&gt;</textarea
@@ -290,7 +400,7 @@
               id="verify_script_btn"
               class="mt-2 w-full bg-[#1B00DF] text-white px-3 py-[0.5rem] text-sm font-light rounded-md"
             >
-              Finish Setup
+              Verify
             </button>
           </div>
         </div>
