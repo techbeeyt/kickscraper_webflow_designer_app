@@ -1,6 +1,6 @@
 var appState = {
-  frontendUrl: "https://kickscraper.com",
-  // frontendUrl: "http://localhost:3000",
+  // frontendUrl: "https://kickscraper.com",
+  frontendUrl: "http://localhost:3000",
   backendUrl: "https://api.kickscraper.com/api",
   // backendUrl: "http://localhost:8000/api",
   apiVerifyForm: {
@@ -511,11 +511,60 @@ var KickScraper = {
     }
   },
   setSelectedApp: async (appId: string) => {
+    KickScraper.showLoadingSpinner();
     /* Which webflow site has which kickscraper app ? */
     const siteId = (await webflow.getSiteInfo()).siteId;
     const _appIds = localStorage.getItem("appIds") || "{}";
     const appIds = JSON.parse(_appIds);
     appIds[siteId] = appId;
+    /* get selected app info */
+    const jwt = localStorage.getItem("jwt");
+    // check if application is verified or not
+    const res = await fetch(`${appState.backendUrl}/user/app/single/${appId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": jwt,
+      },
+    });
+
+    const data = await res.json();
+
+    /* Save the created app domain to verify */
+    localStorage.setItem("createdAppDomain", data.application.domain);
+    localStorage.setItem("createdAppId", appId);
+
+    if (!data.application.verified) {
+      await webflow.notify({
+        type: "Error",
+        message: "Website URL is not verified",
+      });
+
+      KickScraper.setUi("copy_script");
+
+      const res = await fetch(
+        `${appState.backendUrl}/user/api/by_app/${appId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": jwt,
+          },
+        }
+      );
+
+      const response = await res.json();
+
+      const apiKey = response.apiKey[0].key;
+
+      document.getElementById(
+        "copy_script_textarea"
+      ).innerHTML = `<script id="kickscraper_script" src="https://cdn.kickscraper.com/?kick_key=${apiKey}"></script>`;
+
+      KickScraper.hideLoadingSpinner();
+
+      return;
+    }
     /* Set the selected app */
     localStorage.setItem("appIds", JSON.stringify(appIds));
 
@@ -524,6 +573,7 @@ var KickScraper = {
     KickScraper.setUi("stats");
     KickScraper.fetchAppStats();
     KickScraper.fetchAppMetadata();
+    KickScraper.hideLoadingSpinner();
   },
 
   applyFilter: async () => {
@@ -785,7 +835,7 @@ document
       } else {
         await webflow.notify({
           type: "Error",
-          message: "Your app verification failed",
+          message: "Your app verification failed. Try again",
         });
       }
     }, 2000);
